@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avang Sepehr | نمونه</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --text: #fafafa;
+      --muted: #737373;
+      --dim: #404040;
+      --border: #1a1a1a;
+      --accent: #d4ff3a;
+      --surface: #121212;
+      --serif: 'Vazirmatn', sans-serif;
+      --sans: 'Space Grotesk', 'Vazirmatn', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg: #fafaf7;
+      --text: #0a0a0a;
+      --muted: #666666;
+      --dim: #b5b5b5;
+      --border: #ececec;
+      --accent: #a8cc00;
+      --surface: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--serif);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Navigation — ultra minimal */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      transition: all 0.4s;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+    }
+    .logo img {
+      height: 28px;
+    }
+    [data-theme="dark"] .logo-light { display: none; }
+    [data-theme="light"] .logo-dark { display: none; }
+    
+    .nav-center {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-center a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      transition: color 0.3s;
+    }
+    .nav-center a:hover, .nav-center a.active { color: var(--text); }
+    
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      transition: all 0.3s;
+    }
+    .theme-toggle:hover {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+    [data-theme="light"] .t-dark { display: inline; }
+    [data-theme="light"] .t-light { display: none; }
+    [data-theme="dark"] .t-dark { display: none; }
+    [data-theme="dark"] .t-light { display: inline; }
+
+    .menu-btn { display: none; }
+
+    /* Hero — just a statement */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 6rem;
+      padding-bottom: 4rem;
+      position: relative;
+    }
+    .hero-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .hero-title {
+      font-family: var(--sans);
+      font-size: clamp(3rem, 10vw, 9rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 3rem;
+      max-width: 95%;
+    }
+    .hero-title .accent {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+    }
+    .hero-title .stroke {
+      -webkit-text-stroke: 1px var(--text);
+      color: transparent;
+      font-weight: 300;
+    }
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      gap: 3rem;
+    }
+    .hero-desc {
+      max-width: 420px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text);
+      text-decoration: none;
+      font-family: var(--sans);
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 1rem 1.75rem;
+      border: 1px solid var(--text);
+      border-radius: 100px;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+    .hero-cta:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+    .hero-cta svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.3s;
+    }
+    .hero-cta:hover svg { transform: translateX(-4px); }
+
+    /* Big statement */
+    .statement {
+      padding: 8rem 0;
+      text-align: center;
+    }
+    .statement-text {
+      font-family: var(--sans);
+      font-size: clamp(1.5rem, 4vw, 3.25rem);
+      font-weight: 300;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      max-width: 900px;
+      margin: 0 auto;
+      color: var(--muted);
+    }
+    .statement-text strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+    .statement-text em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    /* Services — numbered list */
+    section { padding: 6rem 0; }
+    .section-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-meta .label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .section-meta .count {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--dim);
+    }
+    .section-title {
+      font-family: var(--sans);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      margin-bottom: 4rem;
+      line-height: 1.1;
+      max-width: 800px;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .service-list {
+      list-style: none;
+    }
+    .service-item {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr auto;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+      transition: padding 0.4s;
+      cursor: pointer;
+    }
+    .service-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+    .service-item:hover {
+      padding-right: 1.5rem;
+    }
+    .service-item:hover .service-arrow {
+      color: var(--accent);
+      transform: rotate(-45deg);
+    }
+    .service-num {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--dim);
+    }
+    .service-name {
+      font-family: var(--sans);
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .service-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .service-arrow {
+      font-size: 1.5rem;
+      color: var(--dim);
+      transition: all 0.4s;
+    }
+
+    /* About — big number + text */
+    #about .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .big-number {
+      font-family: var(--sans);
+      font-size: clamp(8rem, 20vw, 18rem);
+      font-weight: 300;
+      line-height: 0.85;
+      letter-spacing: -0.06em;
+      color: var(--text);
+    }
+    .big-number .dot {
+      color: var(--accent);
+    }
+    .big-number-label {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-top: 1rem;
+      text-transform: uppercase;
+    }
+    .about-text h2 {
+      font-family: var(--sans);
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+    .about-text h2 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .about-text p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+      max-width: 500px;
+    }
+    .principles {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: grid;
+      gap: 1.5rem;
+    }
+    .principle {
+      display: flex;
+      gap: 1.5rem;
+      align-items: baseline;
+    }
+    .principle-num {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--dim);
+      min-width: 40px;
+    }
+    .principle-text {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    /* Contact */
+    #contact {
+      padding: 8rem 0;
+    }
+    .contact-head {
+      font-family: var(--sans);
+      font-size: clamp(2.5rem, 7vw, 6rem);
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 4rem;
+      max-width: 1000px;
+    }
+    .contact-head em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .contact-rows {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 2rem 3rem;
+      align-items: baseline;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .contact-value {
+      font-family: var(--sans);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--dim);
+      letter-spacing: 0.02em;
+    }
+    .footer-row .logo img { height: 22px; }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .nav-center { display: none; }
+      .menu-btn {
+        display: block;
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 0.5rem 1rem;
+        border-radius: 100px;
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
+      .nav-center.open {
+        display: flex;
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        width: 100%; height: 100vh;
+        background: var(--bg);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        z-index: 99;
+      }
+      .nav-center.open a { font-size: 1.25rem; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; }
+      #about .grid-2 { grid-template-columns: 1fr; gap: 3rem; }
+      .service-item {
+        grid-template-columns: 50px 1fr auto;
+        gap: 1rem;
+      }
+      .service-desc { grid-column: 2 / 4; }
+      .contact-rows { grid-template-columns: 1fr; gap: 0.5rem; }
+      section { padding: 4rem 0; }
+      .statement { padding: 5rem 0; }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding: 0 1.25rem; }
+      nav { padding: 1.25rem; }
+      .hero-title { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <img src="assets/dark.png" alt="Avang Sepehr" class="logo-dark">
+      <img src="assets/light.jpg" alt="Avang Sepehr" class="logo-light">
+      <span>Avang Sepehr</span>
+    </div>
+    <ul class="nav-center">
+      <li><a href="#hero" class="active">نمونه</a></li>
+      <li><a href="#services">نمونه</a></li>
+      <li><a href="#about">نمونه</a></li>
+      <li><a href="#contact">نمونه</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle">
+        <span class="t-light">DARK</span>
+        <span class="t-dark">LIGHT</span>
+      </button>
+      <button class="menu-btn">MENU</button>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section id="hero">
+      <div class="hero-tag reveal">
+        <span>Avang Sepehr — نمونه تأسیس ۱۳۹۳</span>
+      </div>
+
+      <h1 class="hero-title reveal">
+        نمونه <span class="accent">مدیریت</span><br>
+        <span class="stroke">برج</span> و ساختمان
+      </h1>
+
+      <div class="hero-bottom reveal">
+        <p class="hero-desc">
+          نمونه رویکردی نمونه ساده و نمونه شفاف برای نمونه مدیریت نمونه ساختمان‌های نمونه مسکونی و نمونه تجاری. نمونه تمرکز بر نمونه کیفیت و نمونه آرامش نمونه ساکنین.
+        </p>
+        <a href="#services" class="hero-cta">
+          <span>نمونه مشاهده خدمات</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <div class="statement reveal">
+      <p class="statement-text">
+        <strong>نمونه ساختمان</strong> یک <em>اثر زنده</em> است. نمونه مراقبت از آن نمونه هنری است که نیاز به <strong>نمونه دقت</strong>، نمونه صبر و نمونه تخصص دارد.
+      </p>
+    </div>
+
+    <section id="services">
+      <div class="section-meta reveal">
+        <span class="label">— نمونه خدمات</span>
+        <span class="count">۰۶ نمونه مورد</span>
+      </div>
+
+      <h2 class="section-title reveal">
+        نمونه خدمات <em>تخصصی</em> برای نمونه ساختمان شما
+      </h2>
+
+      <ul class="service-list">
+        <li class="service-item reveal">
+          <span class="service-num">/ ۰۱</span>
+          <span class="service-name">نمونه مدیریت یکپارچه</span>
+          <span class="service-desc">نمونه راهکار کامل برای نمونه مدیریت نمونه روزانه نمونه ساختمان.</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item reveal">
+          <span class="service-num">/ ۰۲</span>
+          <span class="service-name">نمونه نگهداری تأسیسات</span>
+          <span class="service-desc">نمونه برنامه نمونه تعمیرات نمونه پیشگیرانه و نمونه نگهداری نمونه منظم.</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item reveal">
+          <span class="service-num">/ ۰۳</span>
+          <span class="service-name">نمونه امنیت هوشمند</span>
+          <span class="service-desc">نمونه نظارت نمونه ۲۴ ساعته و نمونه کنترل نمونه دسترسی.</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item reveal">
+          <span class="service-num">/ ۰۴</span>
+          <span class="service-name">نمونه گزارش‌های شفاف</span>
+          <span class="service-desc">نمونه داشبورد نمونه مالی و نمونه عملکردی نمونه ماهانه.</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item reveal">
+          <span class="service-num">/ ۰۵</span>
+          <span class="service-name">نمونه هوشمندسازی</span>
+          <span class="service-desc">نمونه اتوماسیون نمونه ساختمان با نمونه فناوری نمونه IoT.</span>
+          <span class="service-arrow">→</span>
+        </li>
+        <li class="service-item reveal">
+          <span class="service-num">/ ۰۶</span>
+          <span class="service-name">نمونه فضای سبز</span>
+          <span class="service-desc">نمونه طراحی و نمونه نگهداری نمونه محوطه‌های نمونه سبز.</span>
+          <span class="service-arrow">→</span>
+        </li>
+      </ul>
+    </section>
+
+    <section id="about">
+      <div class="section-meta reveal">
+        <span class="label">— نمونه درباره ما</span>
+        <span class="count">نمونه استودیو</span>
+      </div>
+
+      <div class="grid-2">
+        <div class="reveal">
+          <div class="big-number">۱۰<span class="dot">.</span></div>
+          <div class="big-number-label">نمونه سال تجربه</div>
+        </div>
+
+        <div class="about-text reveal">
+          <h2>نمونه یک دهه <em>تخصص</em> در نمونه مدیریت نمونه ساختمان</h2>
+          <p>نمونه Avang Sepehr با نمونه هدف نمونه ساده‌سازی نمونه فرآیندهای نمونه مدیریت نمونه ساختمان تأسیس شد.</p>
+          <p>نمونه تیم ما ترکیبی از نمونه مهندسین نمونه تأسیسات، نمونه مدیران نمونه با تجربه و نمونه متخصصین نمونه خدمات است.</p>
+
+          <div class="principles">
+            <div class="principle">
+              <span class="principle-num">/ ۰۱</span>
+              <span class="principle-text">نمونه سادگی در همه چیز</span>
+            </div>
+            <div class="principle">
+              <span class="principle-num">/ ۰۲</span>
+              <span class="principle-text">نمونه شفافیت نمونه کامل</span>
+            </div>
+            <div class="principle">
+              <span class="principle-num">/ ۰۳</span>
+              <span class="principle-text">نمونه تعهد به نمونه کیفیت</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-meta reveal">
+        <span class="label">— نمونه تماس</span>
+        <span class="count">نمونه گفتگو</span>
+      </div>
+
+      <h2 class="contact-head reveal">
+        نمونه <em>گفتگو</em> را<br>آغاز کنیم
+      </h2>
+
+      <div class="contact-rows">
+        <span class="contact-label">تلفن</span>
+        <span class="contact-value">نمونه-نمونه-نمونه-نمونه</span>
+
+        <span class="contact-label">ایمیل</span>
+        <span class="contact-value">hello@avangsepehr.ir</span>
+
+        <span class="contact-label">آدرس</span>
+        <span class="contact-value">نمونه تهران، نمونه ولیعصر، نمونه پلاک</span>
+
+        <span class="contact-label">ساعات</span>
+        <span class="contact-value">نمونه شنبه — چهارشنبه / ۰۹ تا ۱۸</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="footer-row">
+      <div class="logo">
+        <img src="assets/dark.png" alt="Avang Sepehr" class="logo-dark">
+        <img src="assets/light.jpg" alt="Avang Sepehr" class="logo-light">
+      </div>
+      <span>© ۲۰۲۶ Avang Sepehr</span>
+      <span>نمونه تمامی حقوق محفوظ است</span>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.querySelector('.theme-toggle');
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    const menuBtn = document.querySelector('.menu-btn');
+    const navCenter = document.querySelector('.nav-center');
+    menuBtn.addEventListener('click', () => navCenter.classList.toggle('open'));
+    document.querySelectorAll('.nav-center a').forEach(link => {
+      link.addEventListener('click', () => navCenter.classList.remove('open'));
+    });
+
+    const sections = document.querySelectorAll('section, #hero');
+    const navItems = document.querySelectorAll('.nav-center a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 150;
+        if (scrollY >= top) current = sec.id || 'hero';
+      });
+      navItems.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href').includes(current)) a.classList.add('active');
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

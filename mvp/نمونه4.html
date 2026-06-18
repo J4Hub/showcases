@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avang Sepehr | نمونه</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0e0c;
+      --bg-2: #17160f;
+      --surface: #1f1d19;
+      --border: #2a2721;
+      --border-strong: #3d3830;
+      --text: #ede6d6;
+      --text-dim: #8a8272;
+      --text-mute: #5c5648;
+      --accent: #d4a43a;
+      --accent-red: #a0341e;
+      --serif: 'Cormorant Garamond', 'Vazirmatn', serif;
+      --sans: 'Vazirmatn', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    [data-theme="light"] {
+      --bg: #f3ede0;
+      --bg-2: #ebe3d2;
+      --surface: #f9f3e6;
+      --border: #d8cfbd;
+      --border-strong: #bfb49d;
+      --text: #1a1610;
+      --text-dim: #6b6353;
+      --text-mute: #9a9080;
+      --accent: #8a6a1f;
+      --accent-red: #a0341e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.4s var(--ease), color 0.4s var(--ease);
+      position: relative;
+    }
+
+    /* Blueprint Grid Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Noise Texture */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 2;
+      mix-blend-mode: overlay;
+    }
+
+    main, nav, footer { position: relative; z-index: 10; }
+
+    /* Navigation - Editorial Style */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1.5rem 4%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      mix-blend-mode: difference;
+    }
+    nav * { color: #f3ede0 !important; }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo img {
+      height: 36px;
+      filter: invert(1) brightness(0.95) sepia(0.3);
+      transition: filter 0.3s;
+    }
+    [data-theme="light"] .logo img {
+      filter: invert(0) brightness(0.1);
+    }
+    [data-theme="dark"] .logo-light { display: none; }
+    [data-theme="light"] .logo-dark { display: none; }
+    
+    .nav-meta {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::before {
+      content: '— ';
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .nav-links a:hover::before, .nav-links a.active::before { opacity: 1; }
+    
+    .theme-toggle {
+      width: 32px;
+      height: 32px;
+      border: 1px solid currentColor;
+      background: transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      transition: all 0.3s;
+    }
+    .theme-toggle:hover {
+      background: currentColor;
+    }
+    .theme-toggle span {
+      color: var(--bg);
+      transition: color 0.3s;
+    }
+    .theme-toggle:hover span {
+      color: var(--bg);
+    }
+    [data-theme="light"] .t-dark { display: block; }
+    [data-theme="light"] .t-light { display: none; }
+    [data-theme="dark"] .t-dark { display: none; }
+    [data-theme="dark"] .t-light { display: block; }
+
+    .menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid currentColor;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+    }
+
+    /* Sections */
+    section {
+      padding: 10rem 4% 6rem;
+      position: relative;
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+    .section-label::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--text-dim);
+    }
+    .section-number {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    /* Hero */
+    #hero {
+      min-height: 100vh;
+      padding-top: 8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      padding-bottom: 4rem;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(4rem, 11vw, 10rem);
+      font-weight: 500;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .hero-title .outline {
+      -webkit-text-stroke: 1px var(--text);
+      color: transparent;
+    }
+    .hero-side {
+      text-align: left;
+      padding-bottom: 1rem;
+    }
+    .hero-side p {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: var(--text-dim);
+      max-width: 320px;
+      margin-bottom: 2rem;
+    }
+    .hero-year {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border-strong);
+      padding-top: 1rem;
+      max-width: 320px;
+    }
+
+    /* Marquee */
+    .marquee {
+      border-top: 1px solid var(--border-strong);
+      border-bottom: 1px solid var(--border-strong);
+      padding: 1.5rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-inner {
+      display: inline-flex;
+      gap: 3rem;
+      animation: scroll 40s linear infinite;
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-style: italic;
+    }
+    .marquee-inner span {
+      display: inline-flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .marquee-inner span::after {
+      content: '✦';
+      color: var(--accent);
+      font-style: normal;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(50%); }
+    }
+
+    /* Hero Footer Row */
+    .hero-footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border-strong);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+    }
+    .hero-footer div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .hero-footer .big {
+      font-family: var(--serif);
+      font-size: 2.5rem;
+      font-style: italic;
+      font-weight: 500;
+      color: var(--text);
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
+    /* Services - Horizontal Scroll */
+    #services {
+      padding: 8rem 0;
+    }
+    #services .section-header {
+      padding: 0 4% 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+    .services-title {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 500;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+    .services-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .services-desc {
+      color: var(--text-dim);
+      max-width: 420px;
+      line-height: 1.8;
+    }
+
+    .horizontal-scroll {
+      display: flex;
+      gap: 2rem;
+      padding: 0 4%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) transparent;
+    }
+    .horizontal-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+    .horizontal-scroll::-webkit-scrollbar-track {
+      background: var(--border);
+    }
+    .horizontal-scroll::-webkit-scrollbar-thumb {
+      background: var(--accent);
+    }
+
+    .service-card {
+      flex: 0 0 420px;
+      min-height: 520px;
+      scroll-snap-align: start;
+      border: 1px solid var(--border-strong);
+      background: var(--bg-2);
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: all 0.5s var(--ease);
+    }
+    .service-card:hover {
+      background: var(--surface);
+      transform: translateY(-8px);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.5s var(--ease);
+    }
+    .service-card:hover::before {
+      width: 100%;
+    }
+    .service-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 5rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+    .service-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+    .service-title em {
+      font-style: italic;
+      color: var(--text-dim);
+    }
+    .service-desc {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .service-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-mute);
+    }
+    .service-arrow {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      color: var(--text);
+      transition: all 0.3s;
+    }
+    .service-card:hover .service-arrow {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* About - Two Column with Big Numbers */
+    #about {
+      padding-top: 10rem;
+    }
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 0;
+      align-items: start;
+    }
+    .about-divider {
+      background: var(--border-strong);
+      align-self: stretch;
+    }
+    .about-col {
+      padding: 0 4rem;
+    }
+    .about-col:first-child {
+      padding-right: 4rem;
+      padding-left: 2rem;
+    }
+    .about-col:last-child {
+      padding-left: 4rem;
+      padding-right: 2rem;
+    }
+    .about-big-num {
+      font-family: var(--serif);
+      font-size: clamp(5rem, 12vw, 11rem);
+      font-weight: 400;
+      line-height: 0.9;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 2rem;
+      letter-spacing: -0.04em;
+    }
+    .about-big-num .dot {
+      color: var(--accent);
+    }
+    .about-col h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+    .about-col h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .about-col p {
+      color: var(--text-dim);
+      line-height: 1.9;
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .principles {
+      margin-top: 4rem;
+      border-top: 1px solid var(--border-strong);
+      padding-top: 2rem;
+    }
+    .principle {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    .principle:last-child { border-bottom: none; }
+    .principle-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .principle-title {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+    }
+    .principle-desc {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      max-width: 280px;
+    }
+
+    /* Contact - List Style */
+    #contact {
+      padding-top: 10rem;
+    }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-intro h2 {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 500;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+    .contact-intro h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .contact-intro p {
+      color: var(--text-dim);
+      max-width: 360px;
+      line-height: 1.8;
+    }
+    .contact-list {
+      list-style: none;
+      border-top: 1px solid var(--border-strong);
+    }
+    .contact-list li {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border-strong);
+      align-items: center;
+      transition: padding 0.3s;
+    }
+    .contact-list li:hover {
+      padding-right: 1rem;
+    }
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-mute);
+    }
+    .contact-value {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .contact-value em {
+      font-style: italic;
+      color: var(--text-dim);
+    }
+    .contact-arrow {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      color: var(--text-mute);
+      transition: all 0.3s;
+    }
+    .contact-list li:hover .contact-arrow {
+      color: var(--accent);
+      transform: translateX(-8px);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 6rem;
+      padding: 4rem 4% 2rem;
+      border-top: 1px solid var(--border-strong);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .footer-brand .logo {
+      margin-bottom: 1.5rem;
+    }
+    .footer-brand p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      max-width: 300px;
+      line-height: 1.7;
+    }
+    .footer-col h4 {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-mute);
+      margin-bottom: 1.5rem;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .footer-col a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-mute);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .nav-meta .nav-links { display: none; }
+      .menu-btn { display: block; }
+      .nav-links.open {
+        display: flex;
+        position: fixed;
+        top: 0; right: 0;
+        width: 100%; height: 100vh;
+        background: var(--bg);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        z-index: 99;
+      }
+      .nav-links.open a { font-size: 1rem; }
+      .hero-grid { grid-template-columns: 1fr; gap: 2rem; padding-bottom: 2rem; }
+      .hero-footer { grid-template-columns: 1fr 1fr; }
+      #services .section-header { grid-template-columns: 1fr; gap: 2rem; }
+      .service-card { flex: 0 0 85%; min-height: auto; }
+      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .about-divider { display: none; }
+      .about-col { padding: 0 !important; }
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-list li { grid-template-columns: 1fr; gap: 0.5rem; }
+      .contact-arrow { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+      section { padding: 6rem 4% 3rem; }
+      #hero { padding-top: 7rem; }
+    }
+    @media (max-width: 560px) {
+      .hero-footer { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .principle { grid-template-columns: 40px 1fr; gap: 1rem; }
+      .principle-desc { grid-column: 2; max-width: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <img src="assets/dark.png" alt="Avang Sepehr" class="logo-dark">
+      <img src="assets/light.jpg" alt="Avang Sepehr" class="logo-light">
+    </div>
+    <div class="nav-meta">
+      <ul class="nav-links">
+        <li><a href="#hero" class="active">نمونه</a></li>
+        <li><a href="#services">نمونه</a></li>
+        <li><a href="#about">نمونه</a></li>
+        <li><a href="#contact">نمونه</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="نمونه">
+        <span class="t-light">L</span>
+        <span class="t-dark">D</span>
+      </button>
+      <button class="menu-btn" aria-label="نمونه">≡</button>
+    </div>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="section-label">
+        <span class="section-number">N°01</span>
+        <span>Avang Sepehr — نمونه معماری خدمات</span>
+      </div>
+
+      <div class="hero-grid">
+        <h1 class="hero-title reveal">
+          نمونه <em>مدیریت</em><br>
+          <span class="outline">برج</span> و<br>
+          ساختمان
+        </h1>
+        <div class="hero-side reveal">
+          <p>نمونه استودیوی نمونه مدیریت نمونه ساختمان — نمونه ترکیب از نمونه دقت نمونه معماری، نمونه فناوری و نمونه خدمات نمونه حرفه‌ای برای نمونه مالکان و نمونه ساکنین.</p>
+          <div class="hero-year">
+            — نمونه تأسیس <em>Est. 2014</em> — نمونه تهران، ایران
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee reveal">
+        <div class="marquee-inner">
+          <span>نمونه مدیریت</span><span>نمونه نگهداری</span><span>نمونه امنیت</span><span>نمونه هوشمندسازی</span><span>نمونه گزارش</span><span>نمونه فضای سبز</span>
+          <span>نمونه مدیریت</span><span>نمونه نگهداری</span><span>نمونه امنیت</span><span>نمونه هوشمندسازی</span><span>نمونه گزارش</span><span>نمونه فضای سبز</span>
+        </div>
+      </div>
+
+      <div class="hero-footer reveal">
+        <div>
+          <span class="big">نمونه+۱۲۰</span>
+          <span>نمونه پروژه تحویل شده</span>
+        </div>
+        <div>
+          <span class="big">نمونه ۱۰</span>
+          <span>نمونه سال تجربه نمونه</span>
+        </div>
+        <div>
+          <span class="big">۲۴/۷</span>
+          <span>نمونه پشتیبانی نمونه</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-label" style="padding: 0 4%;">
+        <span class="section-number">N°02</span>
+        <span>نمونه خدمات — نمونه فهرست جامع</span>
+      </div>
+
+      <div class="section-header">
+        <h2 class="services-title reveal">
+          نمونه خدمات <em>تخصصی</em> برای نمونه ساختمان‌های نمونه ممتاز
+        </h2>
+        <p class="services-desc reveal">
+          نمونه مجموعه‌ای از نمونه خدمات نمونه مدیریت ساختمان که با نمونه دقت نمونه معماری و نمونه استاندارد نمونه بین‌المللی طراحی شده‌اند.
+          <br><br>
+          <span style="font-family: var(--mono); font-size: 0.8rem; color: var(--accent);">→ نمونه اسکرول افقی</span>
+        </p>
+      </div>
+
+      <div class="horizontal-scroll">
+        <div class="service-card">
+          <div>
+            <div class="service-num">i.</div>
+            <h3 class="service-title">نمونه مدیریت <em>یکپارچه</em></h3>
+            <p class="service-desc">نمونه راهکار کامل برای نمونه مدیریت نمونه برج‌ها و نمونه مجتمع‌های نمونه مسکونی با نمونه سیستم‌های نمونه یکپارچه و نمونه تیم نمونه متخصص.</p>
+          </div>
+          <div class="service-footer">
+            <span>— نمونه ۰۱</span>
+            <div class="service-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-num">ii.</div>
+            <h3 class="service-title">نمونه نگهداری <em>پیشگیرانه</em></h3>
+            <p class="service-desc">نمونه برنامه‌ریزی نمونه تعمیرات و نمونه نگهداری نمونه تأسیسات ساختمانی برای نمونه پیشگیری از نمونه خرابی‌های نمونه پرهزینه.</p>
+          </div>
+          <div class="service-footer">
+            <span>— نمونه ۰۲</span>
+            <div class="service-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-num">iii.</div>
+            <h3 class="service-title">نمونه امنیت <em>هوشمند</em></h3>
+            <p class="service-desc">نمونه نظارت نمونه ۲۴ ساعته، نمونه کنترل نمونه دسترسی و نمونه سیستم‌های نمونه امنیتی نمونه پیشرفته برای نمونه حفاظت از نمونه ساکنین.</p>
+          </div>
+          <div class="service-footer">
+            <span>— نمونه ۰۳</span>
+            <div class="service-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-num">iv.</div>
+            <h3 class="service-title">نمونه گزارش‌های <em>شفاف</em></h3>
+            <p class="service-desc">نمونه داشبورد نمونه مدیریتی و نمونه گزارش‌های نمونه ماهانه برای نمونه شفافیت کامل نمونه مالی و نمونه عملکردی ساختمان.</p>
+          </div>
+          <div class="service-footer">
+            <span>— نمونه ۰۴</span>
+            <div class="service-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-num">v.</div>
+            <h3 class="service-title">نمونه هوشمندسازی <em>IoT</em></h3>
+            <p class="service-desc">نمونه اتوماسیون نمونه ساختمان و نمونه کنترل نمونه سیستم‌های نمونه تأسیساتی از طریق نمونه پلتفرم نمونه هوشمند و نمونه کاربرپسند.</p>
+          </div>
+          <div class="service-footer">
+            <span>— نمونه ۰۵</span>
+            <div class="service-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <div class="service-num">vi.</div>
+            <h3 class="service-title">نمونه فضای <em>سبز</em></h3>
+            <p class="service-desc">نمونه طراحی و نمونه نگهداری نمونه محوطه‌های نمونه سبز، نمونه باغ‌ها و نمونه فضاهای نمونه عمومی مجتمع‌های نمونه مسکونی.</p>
+          </div>
+          <div class="service-footer">
+            <span>— نمونه ۰۶</span>
+            <div class="service-arrow">→</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-label">
+        <span class="section-number">N°03</span>
+        <span>نمونه درباره استودیو — نمونه فلسفه کاری</span>
+      </div>
+
+      <div class="about-layout">
+        <div class="about-col reveal">
+          <div class="about-big-num">۱۰<span class="dot">.</span></div>
+          <h2>نمونه یک دهه <em>نمونه تخصص</em> در نمونه مدیریت ساختمان</h2>
+          <p>نمونه Avang Sepehr از نمونه سال ۱۳۹۳ با نمونه هدف نمونه ارتقا نمونه کیفیت زندگی در نمونه برج‌ها و نمونه مجتمع‌های مسکونی آغاز به کار کرد.</p>
+          <p>نمونه رویکرد ما نمونه ترکیبی از نمونه دقت نمونه مهندسی، نمونه زیبایی‌شناسی نمونه معماری و نمونه خدمات نمونه انسانی است.</p>
+
+          <div class="principles">
+            <div class="principle">
+              <span class="principle-num">۰۱</span>
+              <span class="principle-title">نمونه شفافیت</span>
+              <span class="principle-desc">نمونه گزارش‌های نمونه کامل و نمونه قابل اعتماد</span>
+            </div>
+            <div class="principle">
+              <span class="principle-num">۰۲</span>
+              <span class="principle-title">نمونه دقت</span>
+              <span class="principle-desc">نمونه استانداردهای نمونه بالای نمونه اجرایی</span>
+            </div>
+            <div class="principle">
+              <span class="principle-num">۰۳</span>
+              <span class="principle-title">نمونه پاسخگویی</span>
+              <span class="principle-desc">نمونه تیم نمونه در دسترس نمونه ۲۴ ساعته</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-divider"></div>
+
+        <div class="about-col reveal">
+          <div class="about-big-num" style="color: var(--accent);">ii<span class="dot">.</span></div>
+          <h2>نمونه فلسفه ما — <em>نمونه ساختمان</em> به عنوان نمونه اثر هنری</h2>
+          <p>نمونه هر ساختمان یک نمونه اثر زنده است که نیاز به نمونه مراقبت نمونه حرفه‌ای، نمونه نگهداری نمونه دقیق و نمونه مدیریت نمونه هوشمندانه دارد.</p>
+          <p>ما نمونه ساختمان شما را نه به عنوان نمونه یک پروژه، بلکه به عنوان نمونه یک نمونه میراث می‌بینیم که باید با نمونه احترام نمونه کامل نمونه نگهداری شود.</p>
+          <p>نمونه تیم ما متشکل از نمونه متخصصین نمونه معماری، نمونه مهندسین نمونه تأسیسات و نمونه مدیران نمونه با تجربه است که همگی به نمونه کیفیت نمونه متعهد هستند.</p>
+          <p style="border-top: 1px solid var(--border-strong); padding-top: 1.5rem; margin-top: 1rem; font-family: var(--mono); font-size: 0.8rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 2px;">
+            — نمونه امضای استودیو
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-label">
+        <span class="section-number">N°04</span>
+        <span>نمونه تماس — نمونه گفتگو را آغاز کنید</span>
+      </div>
+
+      <div class="contact-layout">
+        <div class="contact-intro reveal">
+          <h2>نمونه <em>گفتگو</em> را آغاز کنیم</h2>
+          <p>نمونه استودیوی ما آماده نمونه شنیدن درباره نمونه پروژه شما و نمونه ارائه نمونه مشاوره نمونه تخصصی است.</p>
+          <p style="margin-top: 2rem; font-family: var(--mono); font-size: 0.75rem; color: var(--text-mute); text-transform: uppercase; letter-spacing: 2px;">
+            — نمونه ساعت کاری<br>
+            نمونه شنبه تا چهارشنبه<br>
+            ۰۹:۰۰ — ۱۸:۰۰
+          </p>
+        </div>
+
+        <ul class="contact-list">
+          <li class="reveal">
+            <span class="contact-label">تلفن</span>
+            <span class="contact-value">نمونه-نمونه<em>-</em>نمونه-نمونه</span>
+            <span class="contact-arrow">↗</span>
+          </li>
+          <li class="reveal">
+            <span class="contact-label">ایمیل</span>
+            <span class="contact-value">hello<em>@</em>avangsepehr.ir</span>
+            <span class="contact-arrow">↗</span>
+          </li>
+          <li class="reveal">
+            <span class="contact-label">استودیو</span>
+            <span class="contact-value">نمونه تهران، <em>ولیعصر</em></span>
+            <span class="contact-arrow">↗</span>
+          </li>
+          <li class="reveal">
+            <span class="contact-label">شبکه‌ها</span>
+            <span class="contact-value">نمونه اینستاگرام<em>،</em> لینکدین</span>
+            <span class="contact-arrow">↗</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="assets/dark.png" alt="Avang Sepehr" class="logo-dark">
+          <img src="assets/light.jpg" alt="Avang Sepehr" class="logo-light">
+        </div>
+        <p>نمونه استودیوی نمونه مدیریت نمونه برج و نمونه ساختمان — نمونه تهران، ایران.</p>
+      </div>
+      <div class="footer-col">
+        <h4>نمونه ناوبری</h4>
+        <ul>
+          <li><a href="#hero">نمونه</a></li>
+          <li><a href="#services">نمونه</a></li>
+          <li><a href="#about">نمونه</a></li>
+          <li><a href="#contact">نمونه</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>نمونه خدمات</h4>
+        <ul>
+          <li><a href="#">نمونه مدیریت</a></li>
+          <li><a href="#">نمونه نگهداری</a></li>
+          <li><a href="#">نمونه امنیت</a></li>
+          <li><a href="#">نمونه هوشمندسازی</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>نمونه ارتباط</h4>
+        <ul>
+          <li><a href="#">نمونه تلفن</a></li>
+          <li><a href="#">نمونه ایمیل</a></li>
+          <li><a href="#">نمونه آدرس</a></li>
+          <li><a href="#">نمونه فرم</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© MMXXVI — Avang Sepehr</span>
+      <span>نمونه استودیو — نمونه طراحی و نمونه توسعه</span>
+      <span>نمونه تمامی حقوق محفوظ است</span>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // Mobile Menu
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Scroll Spy
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 150;
+        if (scrollY >= top) current = sec.getAttribute('id');
+      });
+      navItems.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href').includes(current)) a.classList.add('active');
+      });
+    });
+
+    // Reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

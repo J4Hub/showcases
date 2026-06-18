@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avang Sepehr | نمونه</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fafaf9;
+      --surface: #ffffff;
+      --border: #e7e5e4;
+      --text: #1c1917;
+      --text-muted: #78716c;
+      --accent: #c2410c;
+      --accent-soft: rgba(194, 65, 12, 0.06);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --radius: 2px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --grid-line: rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0c0a09;
+      --surface: #1c1917;
+      --border: #292524;
+      --text: #fafaf9;
+      --text-muted: #a8a29e;
+      --accent: #fb923c;
+      --accent-soft: rgba(251, 146, 60, 0.08);
+      --grid-line: rgba(255, 255, 255, 0.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Vazirmatn', system-ui, sans-serif;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 48px 48px;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 5%; }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1rem 5%;
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      transition: all var(--transition);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { display: flex; align-items: center; gap: 0.75rem; }
+    .logo img { height: 32px; width: auto; }
+    [data-theme="dark"] .logo-light { display: none; }
+    [data-theme="light"] .logo-dark { display: none; }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    .nav-actions { display: flex; align-items: center; gap: 1rem; }
+    .theme-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+    [data-theme="light"] .theme-btn::before { content: 'DARK'; }
+    [data-theme="dark"] .theme-btn::before { content: 'LIGHT'; }
+
+    .menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 36px; height: 36px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    /* Sections */
+    section { padding: 6rem 0 4rem; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+
+    /* Tags & Labels */
+    .tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    /* Hero */
+    #hero { padding-top: 9rem; padding-bottom: 5rem; }
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+      align-items: end;
+    }
+    .hero-title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -1px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title .hl { color: var(--accent); }
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .btn-fill { background: var(--accent); color: #fff; }
+    .btn-fill:hover { background: color-mix(in srgb, var(--accent) 85%, #000); }
+    .btn-line { background: transparent; color: var(--text); border-color: var(--border); }
+    .btn-line:hover { border-color: var(--text); }
+
+    .hero-visual {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      position: relative;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-visual::before, .hero-visual::after {
+      content: '';
+      position: absolute;
+      width: 12px; height: 12px;
+      border: 1px solid var(--accent);
+    }
+    .hero-visual::before { top: 12px; right: 12px; border-bottom: none; border-left: none; }
+    .hero-visual::after { bottom: 12px; left: 12px; border-top: none; border-right: none; }
+    .visual-placeholder {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .hero-meta {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-item {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      border-left: 1px solid var(--border);
+    }
+    .meta-item:last-child { border-left: none; }
+    .meta-val {
+      display: block;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .meta-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Services */
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 3.5rem;
+    }
+    .section-head h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+    .section-head p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .svc-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: var(--transition);
+      position: relative;
+    }
+    .svc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .svc-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .svc-card:hover::before { opacity: 1; }
+    .svc-index {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+    .svc-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .svc-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* About / Process */
+    .about-split {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .about-text p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 1rem; }
+    
+    .process-steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition);
+    }
+    .step:first-child { padding-top: 0; }
+    .step:last-child { border-bottom: none; }
+    .step:hover { padding-right: 0.5rem; }
+    .step-num {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 700;
+      padding-top: 0.25rem;
+    }
+    .step-content h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .step-content p { color: var(--text-muted); font-size: 0.9rem; margin: 0; line-height: 1.6; }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .contact-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: var(--transition);
+    }
+    .contact-tile:hover { border-color: var(--accent); }
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .contact-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-inner .logo img { height: 28px; }
+    .footer-copy {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+    .footer-nav { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+    .footer-nav a:hover { color: var(--text); }
+
+    /* Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .nav-links { display: none; }
+      .menu-btn { display: block; }
+      .nav-links.open {
+        display: flex;
+        position: fixed;
+        top: 64px; left: 0; right: 0;
+        flex-direction: column;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 5%;
+        gap: 1.25rem;
+        align-items: flex-start;
+      }
+      .hero-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .section-head { grid-template-columns: 1fr; gap: 1rem; }
+      .about-split { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-meta { grid-template-columns: repeat(2, 1fr); }
+      .meta-item:nth-child(2) { border-left: none; }
+      section { padding: 5rem 0 3rem; }
+      #hero { padding-top: 7.5rem; }
+    }
+    @media (max-width: 560px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .hero-meta { grid-template-columns: 1fr; }
+      .meta-item { border-left: none; border-bottom: 1px solid var(--border); }
+      .meta-item:last-child { border-bottom: none; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">
+        <img src="assets/dark.png" alt="Avang Sepehr" class="logo-dark">
+        <img src="assets/light.jpg" alt="Avang Sepehr" class="logo-light">
+      </div>
+      <ul class="nav-links">
+        <li><a href="#hero" class="active">نمونه</a></li>
+        <li><a href="#services">نمونه</a></li>
+        <li><a href="#about">نمونه</a></li>
+        <li><a href="#contact">نمونه</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-btn" aria-label="نمونه"></button>
+        <button class="menu-btn" aria-label="نمونه">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="container">
+        <div class="hero-layout">
+          <div class="reveal">
+            <span class="tag">SYS: ACTIVE</span>
+            <h1 class="hero-title">نمونه مدیریت <span class="hl">نمونه</span> ساختمان</h1>
+            <p class="hero-desc">نمونه پلتفرم یکپارچه برای نمونه مدیریت نمونه برج‌ها و نمونه مجتمع‌های تجاری. نمونه شفافیت، نمونه کنترل و نمونه بهینه‌سازی نمونه منابع.</p>
+            <div class="hero-actions">
+              <a href="#services" class="btn btn-fill">مشاهده نمونه خدمات →</a>
+              <a href="#contact" class="btn btn-line">تماس نمونه</a>
+            </div>
+          </div>
+          <div class="hero-visual reveal">
+            <span class="visual-placeholder">[ نمونه بصری ]</span>
+          </div>
+        </div>
+        <div class="hero-meta reveal">
+          <div class="meta-item">
+            <span class="meta-val">نمونه+</span>
+            <span class="meta-label">نمونه پروژه</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-val">نمونه</span>
+            <span class="meta-label">نمونه سال تجربه</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-val">نمونه٪</span>
+            <span class="meta-label">نمونه رضایت</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-val">۲۴/۷</span>
+            <span class="meta-label">نمونه پشتیبانی</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="tag">MODULES</span>
+            <h2>نمونه راهکارهای نمونه ساختاریافته</h2>
+          </div>
+          <p>نمونه ماژول‌های نمونه تخصصی برای نمونه پوشش کامل نمونه نیازهای نمونه مدیریتی و نمونه عملیاتی نمونه ساختمان‌های نمونه مدرن.</p>
+        </div>
+        <div class="services-grid">
+          <div class="svc-card reveal">
+            <span class="svc-index">01 / SYS</span>
+            <h3>نمونه عنوان خدمات</h3>
+            <p>نمونه متن نمونه برای توضیح نمونه خدمات نمونه مدیریت نمونه برج‌ها و نمونه مجتمع‌های مسکونی با نمونه رویکرد نمونه سیستماتیک.</p>
+          </div>
+          <div class="svc-card reveal">
+            <span class="svc-index">02 / MNT</span>
+            <h3>نمونه عنوان خدمات</h3>
+            <p>نمونه متن نمونه برای توضیح نمونه خدمات نمونه نگهداری نمونه و نمونه تعمیرات نمونه پیشگیرانه نمونه تأسیسات.</p>
+          </div>
+          <div class="svc-card reveal">
+            <span class="svc-index">03 / SEC</span>
+            <h3>نمونه عنوان خدمات</h3>
+            <p>نمونه متن نمونه برای توضیح نمونه خدمات نمونه امنیت نمونه و نمونه کنترل نمونه دسترسی نمونه هوشمند.</p>
+          </div>
+          <div class="svc-card reveal">
+            <span class="svc-index">04 / DAT</span>
+            <h3>نمونه عنوان خدمات</h3>
+            <p>نمونه متن نمونه برای توضیح نمونه خدمات نمونه تحلیل نمونه داده و نمونه گزارش‌گیری نمونه شفاف.</p>
+          </div>
+          <div class="svc-card reveal">
+            <span class="svc-index">05 / ENV</span>
+            <h3>نمونه عنوان خدمات</h3>
+            <p>نمونه متن نمونه برای توضیح نمونه خدمات نمونه مدیریت نمونه فضای سبز و نمونه محیط زیست نمونه ساختمان.</p>
+          </div>
+          <div class="svc-card reveal">
+            <span class="svc-index">06 / IOT</span>
+            <h3>نمونه عنوان خدمات</h3>
+            <p>نمونه متن نمونه برای توضیح نمونه خدمات نمونه هوشمندسازی نمونه و نمونه یکپارچه‌سازی نمونه سیستم‌ها.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-split">
+          <div class="about-text reveal">
+            <span class="tag">PROCESS</span>
+            <h2>نمونه رویکرد نمونه مهندسی به مدیریت</h2>
+            <p>نمونه سال تجربه در نمونه پیاده‌سازی نمونه استانداردهای نمونه بین‌المللی مدیریت نمونه ساختمان.</p>
+            <p>نمونه تیم متخصص نمونه ما با نمونه تحلیل دقیق نمونه وضعیت موجود، نمونه راهکارهای نمونه مقیاس‌پذیر و نمونه پایدار ارائه می‌دهد.</p>
+          </div>
+          <div class="process-steps reveal">
+            <div class="step">
+              <span class="step-num">PH.01</span>
+              <div class="step-content">
+                <h4>نمونه ارزیابی اولیه</h4>
+                <p>نمونه بررسی نمونه ساختار، نمونه تأسیسات و نمونه نیازهای نمونه عملیاتی.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-num">PH.02</span>
+              <div class="step-content">
+                <h4>نمونه طراحی معماری</h4>
+                <p>نمونه تدوین نمونه نقشه راه نمونه اختصاصی و نمونه تخصیص نمونه منابع.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-num">PH.03</span>
+              <div class="step-content">
+                <h4>نمونه استقرار سیستم</h4>
+                <p>نمونه پیاده‌سازی نمونه ماژول‌ها، نمونه آموزش نمونه پرسنل و نمونه راه‌اندازی.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-num">PH.04</span>
+              <div class="step-content">
+                <h4>نمونه بهینه‌سازی مستمر</h4>
+                <p>نمونه پایش نمونه عملکرد، نمونه گزارش‌گیری نمونه دوره‌ای و نمونه ارتقاء.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="tag">CONNECT</span>
+            <h2>نمونه کانال‌های ارتباطی</h2>
+          </div>
+          <p>نمونه دسترسی مستقیم به نمونه تیم پشتیبانی و نمونه مشاوره تخصصی برای نمونه پروژه‌های نمونه مدیریت ساختمان.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-tile reveal">
+            <span class="contact-label">TELEPHONE</span>
+            <div class="contact-value">نمونه-نمونه-نمونه-نمونه</div>
+          </div>
+          <div class="contact-tile reveal">
+            <span class="contact-label">EMAIL</span>
+            <div class="contact-value">نمونه@نمونه.com</div>
+          </div>
+          <div class="contact-tile reveal">
+            <span class="contact-label">LOCATION</span>
+            <div class="contact-value">نمونه، نمونه، نمونه، نمونه</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="logo">
+          <img src="assets/dark.png" alt="Avang Sepehr" class="logo-dark">
+          <img src="assets/light.jpg" alt="Avang Sepehr" class="logo-light">
+        </div>
+        <ul class="footer-nav">
+          <li><a href="#hero">نمونه</a></li>
+          <li><a href="#services">نمونه</a></li>
+          <li><a href="#about">نمونه</a></li>
+          <li><a href="#contact">نمونه</a></li>
+        </ul>
+        <span class="footer-copy">© 2026 AVANG SEPEHR — SAMPLE</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    const themeBtn = document.querySelector('.theme-btn');
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    
+    themeBtn.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // Mobile Menu
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Scroll Spy
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (scrollY >= s.offsetTop - 120) current = s.id; });
+      navItems.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href').includes(current));
+      });
+    });
+
+    // Reveal
+    const obs = new IntersectionObserver(e => e.forEach(en => en.isIntersecting && en.target.classList.add('visible')), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

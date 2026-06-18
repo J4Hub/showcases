@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avang Sepehr | نمونه</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0f1c;
+      --surface: #111827;
+      --surface-2: #1f2937;
+      --border: #27303f;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      --accent: #10b981;
+      --accent-soft: rgba(16, 185, 129, 0.1);
+      --radius: 12px;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --surface: #f9fafb;
+      --surface-2: #f3f4f6;
+      --border: #e5e7eb;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #94a3b8;
+      --accent: #059669;
+      --accent-soft: rgba(5, 150, 105, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Vazirmatn', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+      font-weight: 400;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+
+    /* Navigation - Enterprise Style */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 1rem 5%;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      transition: all var(--transition);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 2rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo img {
+      height: 32px;
+      width: auto;
+    }
+    [data-theme="dark"] .logo-light { display: none; }
+    [data-theme="light"] .logo-dark { display: none; }
+    
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      justify-content: center;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .icon-btn:hover {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--text-dim);
+    }
+    .icon-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+    [data-theme="light"] .moon-icon { display: block; }
+    [data-theme="light"] .sun-icon { display: none; }
+    [data-theme="dark"] .moon-icon { display: none; }
+    [data-theme="dark"] .sun-icon { display: block; }
+
+    .menu-btn { display: none; }
+
+    /* Sections */
+    section {
+      padding: 7rem 0 5rem;
+    }
+
+    /* Hero - Split Layout */
+    #hero {
+      padding-top: 10rem;
+      padding-bottom: 5rem;
+    }
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.9rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.5); }
+    }
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -1.5px;
+    }
+    .hero-content h1 .accent {
+      color: var(--accent);
+    }
+    .hero-content .lead {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+      max-width: 520px;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: color-mix(in srgb, var(--accent) 85%, #000);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .btn-ghost:hover {
+      background: var(--surface);
+      border-color: var(--text-dim);
+    }
+    .btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Hero Visual - Enterprise Chart */
+    .hero-visual {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative;
+    }
+    .visual-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .visual-header h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .visual-badge {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      background: var(--accent-soft);
+      border-radius: 6px;
+    }
+    .chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.75rem;
+      height: 220px;
+      padding: 1rem 0;
+    }
+    .chart-bar {
+      flex: 1;
+      background: linear-gradient(to top, var(--accent), color-mix(in srgb, var(--accent) 40%, transparent));
+      border-radius: 6px 6px 0 0;
+      position: relative;
+      transition: var(--transition);
+      min-height: 20px;
+    }
+    .chart-bar:hover {
+      background: var(--accent);
+    }
+    .chart-bar::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+    .visual-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .mini-stat {
+      text-align: right;
+    }
+    .mini-stat-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      display: block;
+    }
+    .mini-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* Section Header */
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.75rem;
+    }
+    .section-head h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+    .section-head p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* Bento Grid Services */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(200px, auto);
+      gap: 1.25rem;
+    }
+    .bento-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .bento-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .bento-large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .bento-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-soft);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .bento-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+    .bento-item h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .bento-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .bento-large h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .bento-large p {
+      font-size: 1rem;
+    }
+
+    /* About / Process */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-intro h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.5rem;
+    }
+    .about-intro p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .process-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .process-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      transition: var(--transition);
+    }
+    .process-item:hover {
+      border-color: var(--accent);
+      background: var(--surface-2);
+    }
+    .process-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .process-content h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .process-content p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .process-arrow {
+      color: var(--text-dim);
+      transition: var(--transition);
+    }
+    .process-item:hover .process-arrow {
+      color: var(--accent);
+      transform: translateX(-4px);
+    }
+    .process-arrow svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .contact-tile {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem 2rem;
+      transition: var(--transition);
+    }
+    .contact-tile:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .contact-tile-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .contact-tile-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+    .contact-tile h3 {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .contact-tile p {
+      color: var(--text);
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      padding: 3rem 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-inner .logo img {
+      height: 28px;
+    }
+    .footer-meta {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    /* Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 968px) {
+      .nav-inner { grid-template-columns: auto 1fr auto; }
+      .nav-links { display: none; }
+      .menu-btn { display: flex; }
+      
+      .nav-links.open {
+        display: flex;
+        position: fixed;
+        top: 68px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 1.5rem 5%;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      
+      .hero-split { grid-template-columns: 1fr; gap: 3rem; }
+      .section-head { grid-template-columns: 1fr; gap: 1rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .bento { grid-template-columns: 1fr; }
+      .bento-large { grid-column: span 1; grid-row: span 1; }
+      .contact-grid { grid-template-columns: 1fr; }
+      section { padding: 5rem 0 3rem; }
+      #hero { padding-top: 8rem; }
+    }
+    @media (max-width: 560px) {
+      .visual-stats { grid-template-columns: 1fr 1fr; }
+      .hero-cta { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: center; }
+      .process-item { grid-template-columns: auto 1fr; }
+      .process-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">
+        <img src="assets/dark.png" alt="Avang Sepehr" class="logo-dark">
+        <img src="assets/light.jpg" alt="Avang Sepehr" class="logo-light">
+      </div>
+      <ul class="nav-links">
+        <li><a href="#hero" class="active">نمونه</a></li>
+        <li><a href="#services">نمونه</a></li>
+        <li><a href="#about">نمونه</a></li>
+        <li><a href="#contact">نمونه</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="icon-btn theme-toggle" aria-label="نمونه">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+        <button class="icon-btn menu-btn" aria-label="نمونه">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section id="hero">
+      <div class="container">
+        <div class="hero-split">
+          <div class="hero-content reveal">
+            <span class="hero-eyebrow">نمونه در دسترس</span>
+            <h1>نمونه مدیریت <span class="accent">نمونه</span> ساختمان</h1>
+            <p class="lead">نمونه پلتفرم یکپارچه برای نمونه مدیریت نمونه برج‌ها و ساختمان‌های تجاری با رویکرد نمونه حرفه‌ای و نمونه شفافیت کامل.</p>
+            <div class="hero-cta">
+              <a href="#services" class="btn btn-primary">
+                مشاهده نمونه خدمات
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"/>
+                  <polyline points="12 19 5 12 12 5"/>
+                </svg>
+              </a>
+              <a href="#contact" class="btn btn-ghost">تماس نمونه</a>
+            </div>
+          </div>
+          <div class="hero-visual reveal">
+            <div class="visual-header">
+              <h4>نمونه عملکرد</h4>
+              <span class="visual-badge">+نمونه٪</span>
+            </div>
+            <div class="chart">
+              <div class="chart-bar" style="height: 45%" data-label="ف"></div>
+              <div class="chart-bar" style="height: 65%" data-label="ا"></div>
+              <div class="chart-bar" style="height: 55%" data-label="ر"></div>
+              <div class="chart-bar" style="height: 80%" data-label="و"></div>
+              <div class="chart-bar" style="height: 70%" data-label="ر"></div>
+              <div class="chart-bar" style="height: 92%" data-label="د"></div>
+              <div class="chart-bar" style="height: 85%" data-label="ی"></div>
+            </div>
+            <div class="visual-stats">
+              <div class="mini-stat">
+                <span class="mini-stat-value">نمونه+</span>
+                <span class="mini-stat-label">نمونه پروژه</span>
+              </div>
+              <div class="mini-stat">
+                <span class="mini-stat-value">نمونه٪</span>
+                <span class="mini-stat-label">نمونه رضایت</span>
+              </div>
+              <div class="mini-stat">
+                <span class="mini-stat-value">۲۴/۷</span>
+                <span class="mini-stat-label">نمونه پشتیبانی</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-tag">◆ نمونه خدمات</span>
+            <h2>نمونه راهکارهای نمونه جامع مدیریت</h2>
+          </div>
+          <p>نمونه مجموعه کاملی از نمونه خدمات نمونه مدیریت ساختمان که نمونه نیازهای نمونه ساکنین و نمونه مالکان را به صورت نمونه یکپارچه پوشش می‌دهد.</p>
+        </div>
+        <div class="bento">
+          <div class="bento-item bento-large reveal">
+            <div class="bento-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <line x1="9" y1="9" x2="15" y2="9"/>
+                <line x1="9" y1="13" x2="15" y2="13"/>
+                <line x1="9" y1="17" x2="13" y2="17"/>
+              </svg>
+            </div>
+            <h3>نمونه عنوان اصلی خدمات</h3>
+            <p>نمونه توضیح جامع برای نمونه خدمت اصلی. نمونه سیستم یکپارچه برای نمونه مدیریت نمونه کامل برج‌ها و نمونه مجتمع‌های مسکونی با نمونه امکانات نمونه پیشرفته.</p>
+          </div>
+          <div class="bento-item reveal">
+            <div class="bento-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <h3>نمونه نگهداری</h3>
+            <p>نمونه خدمات نمونه تعمیرات و نگهداری نمونه پیشگیرانه.</p>
+          </div>
+          <div class="bento-item reveal">
+            <div class="bento-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <h3>نمونه امنیت</h3>
+            <p>نمونه نظارت نمونه هوشمند و نمونه کنترل دسترسی.</p>
+          </div>
+          <div class="bento-item reveal">
+            <div class="bento-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"/>
+                <line x1="12" y1="20" x2="12" y2="4"/>
+                <line x1="6" y1="20" x2="6" y2="14"/>
+              </svg>
+            </div>
+            <h3>نمونه گزارش‌ها</h3>
+            <p>نمونه تحلیل نمونه عملکرد و نمونه داشبورد نمونه شفاف.</p>
+          </div>
+          <div class="bento-item reveal">
+            <div class="bento-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3>نمونه هوشمندسازی</h3>
+            <p>نمونه اتوماسیون نمونه ساختمان و نمونه کنترل نمونه IoT.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-intro reveal">
+            <span class="section-tag">◆ درباره ما</span>
+            <h2>نمونه رویکرد نمونه حرفه‌ای به مدیریت ساختمان</h2>
+            <p>نمونه سال تجربه در نمونه مدیریت نمونه برج‌های مسکونی و نمونه تجاری.</p>
+            <p>نمونه تیم متخصص نمونه ما با نمونه بهره‌گیری از نمونه فناوری‌های نوین، نمونه استانداردهای نمونه بین‌المللی را در نمونه صنعت ساختمان پیاده‌سازی می‌کند.</p>
+          </div>
+          <div class="process-list">
+            <div class="process-item reveal">
+              <div class="process-num">۰۱</div>
+              <div class="process-content">
+                <h4>نمونه ارزیابی اولیه</h4>
+                <p>نمونه بررسی نمونه وضعیت موجود و نمونه شناسایی نیازهای نمونه ساختمان.</p>
+              </div>
+              <div class="process-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"/>
+                  <polyline points="12 19 5 12 12 5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="process-item reveal">
+              <div class="process-num">۰۲</div>
+              <div class="process-content">
+                <h4>نمونه طراحی راهکار</h4>
+                <p>نمونه تدوین نمونه برنامه نمونه اختصاصی برای نمونه پروژه شما.</p>
+              </div>
+              <div class="process-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"/>
+                  <polyline points="12 19 5 12 12 5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="process-item reveal">
+              <div class="process-num">۰۳</div>
+              <div class="process-content">
+                <h4>نمونه پیاده‌سازی</h4>
+                <p>نمونه استقرار نمونه سیستم‌ها و نمونه آموزش نمونه تیم اجرایی.</p>
+              </div>
+              <div class="process-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"/>
+                  <polyline points="12 19 5 12 12 5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="process-item reveal">
+              <div class="process-num">۰۴</div>
+              <div class="process-content">
+                <h4>نمونه پشتیبانی مستمر</h4>
+                <p>نمونه نظارت نمونه ۲۴ ساعته و نمونه بهینه‌سازی نمونه مداوم.</p>
+              </div>
+              <div class="process-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="19" y1="12" x2="5" y2="12"/>
+                  <polyline points="12 19 5 12 12 5"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-tag">◆ تماس</span>
+            <h2>نمونه راه‌های ارتباطی</h2>
+          </div>
+          <p>نمونه تیم ما آماده نمونه پاسخگویی به نمونه سوالات و نمونه ارائه نمونه مشاوره تخصصی در زمینه نمونه مدیریت ساختمان است.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-tile reveal">
+            <div class="contact-tile-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <h3>نمونه تلفن</h3>
+            <p>نمونه-نمونه-نمونه-نمونه</p>
+          </div>
+          <div class="contact-tile reveal">
+            <div class="contact-tile-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <h3>نمونه ایمیل</h3>
+            <p>نمونه@نمونه.com</p>
+          </div>
+          <div class="contact-tile reveal">
+            <div class="contact-tile-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <h3>نمونه آدرس</h3>
+            <p>نمونه، نمونه، نمونه</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="logo">
+          <img src="assets/dark.png" alt="Avang Sepehr" class="logo-dark">
+          <img src="assets/light.jpg" alt="Avang Sepehr" class="logo-light">
+        </div>
+        <ul class="footer-links">
+          <li><a href="#hero">نمونه</a></li>
+          <li><a href="#services">نمونه</a></li>
+          <li><a href="#about">نمونه</a></li>
+          <li><a href="#contact">نمونه</a></li>
+        </ul>
+        <span class="footer-meta">© ۲۰۲۶ Avang Sepehr — نمونه</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.querySelector('.theme-toggle');
+    const html = document.documentElement;
+    
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // Mobile Menu
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // Scroll Spy
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        const top = sec.offsetTop - 120;
+        if (scrollY >= top) current = sec.getAttribute('id');
+      });
+      navItems.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href').includes(current)) a.classList.add('active');
+      });
+    });
+
+    // Reveal on Scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
