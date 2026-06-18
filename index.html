@@ -3,111 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J4 MVP-Showcases</title>
+    <title>J4 — MVP Showcases</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf3 100%);
+            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #d8d4cc;
+            color: #2a2824;
             min-height: 100vh;
-            padding: 60px 20px;
+            padding: 80px 24px;
+            -webkit-font-smoothing: antialiased;
         }
+
         .container {
-            max-width: 900px;
+            max-width: 720px;
             margin: 0 auto;
         }
+
         .header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: fadeInDown 0.6s ease;
+            margin-bottom: 48px;
         }
         .header h1 {
-            font-size: 42px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 12px;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            color: #1a1814;
         }
         .header p {
-            color: #666;
-            font-size: 16px;
+            color: #6b675f;
+            font-size: 15px;
+            font-weight: 400;
         }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 8px;
         }
+
         .card {
-            background: white;
-            padding: 28px;
-            border-radius: 16px;
+            background: #e8e4dc;
+            border: 1px solid #c4c0b8;
+            border-radius: 10px;
+            padding: 18px 20px;
             text-decoration: none;
-            color: #333;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.05);
-            animation: fadeInUp 0.6s ease backwards;
+            color: #2a2824;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            transition: all 0.2s ease;
         }
-        .card:nth-child(1) { animation-delay: 0.1s; }
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.3s; }
-        .card:nth-child(4) { animation-delay: 0.4s; }
-        .card:nth-child(5) { animation-delay: 0.5s; }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s;
-        }
+
         .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+            background: #f0ece4;
+            border-color: #b0aca4;
+            transform: translateX(-2px);
         }
-        .card:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
         }
-        .card h3 {
-            font-size: 20px;
-            font-weight: 600;
-            color: #222;
-            margin-bottom: 10px;
+
+        .card-name {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.3;
         }
-        .card p {
-            color: #777;
-            font-size: 14px;
-            line-height: 1.6;
+
+        .card-desc {
+            color: #6b675f;
+            font-size: 13px;
+            font-weight: 400;
         }
+
         .card-arrow {
-            position: absolute;
-            top: 28px;
-            left: 28px;
-            color: #667eea;
-            font-size: 20px;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s;
+            color: #8a857d;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .card-arrow svg {
+            width: 16px;
+            height: 16px;
         }
         .card:hover .card-arrow {
-            opacity: 1;
-            transform: translateX(0);
+            color: #2a2824;
+            transform: translateX(-4px);
         }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 600px) {
+            body { padding: 60px 16px; }
+            .header h1 { font-size: 26px; }
+            .header p { font-size: 14px; }
+            .card { padding: 16px 18px; }
         }
     </style>
 </head>
@@ -115,15 +109,10 @@
     <div class="container">
         <div class="header">
             <h1>MVP Showcases</h1>
-            <p>مجموعه‌ای از پروژه‌ها و ایده‌های من</p>
+            <p>روی هر کدوم کلیک کنید</p>
         </div>
-        
-        <!-- ═══════════════════════════════════════════════════════ -->
-        <!-- SHOWCASES REGION - Add your projects here -->
-        <!-- ═══════════════════════════════════════════════════════ -->
+
         <div class="grid" id="showcases"></div>
-        <!-- ═══════════════════════════════════════════════════════ -->
-        
     </div>
 
     <script>
@@ -132,6 +121,9 @@
             { name: 'نمونه 2', file: 'نمونه2.html', desc: 'Prototype 2' },
             { name: 'نمونه 3', file: 'نمونه3.html', desc: 'Prototype 3' },
             { name: 'نمونه 4', file: 'نمونه4.html', desc: 'Prototype 4' },
+            { name: 'نمونه 5', file: 'نمونه5.html', desc: 'Prototype 5' },
+            { name: 'نمونه 6', file: 'نمونه6.html', desc: 'Prototype 6' },
+            { name: 'نمونه 7', file: 'نمونه7.html', desc: 'Prototype 7' },
             // فایل‌های بیشتر را اینجا اضافه کنید:
             // { name: 'نمونه ۲', file: 'نمونه2.html', desc: 'توضیح پروژه دوم' },
         ];
@@ -142,9 +134,16 @@
             link.href = `mvp/${item.file}`;
             link.className = 'card';
             link.innerHTML = `
-                <span class="card-arrow">←</span>
-                <h3>${item.name}</h3>
-                <p>${item.desc}</p>
+                <div class="card-info">
+                    <span class="card-name">${item.name}</span>
+                    <span class="card-desc">${item.desc}</span>
+                </div>
+                <span class="card-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <line x1="19" y1="12" x2="5" y2="12"/>
+                        <polyline points="12 19 5 12 12 5"/>
+                    </svg>
+                </span>
             `;
             container.appendChild(link);
         });
